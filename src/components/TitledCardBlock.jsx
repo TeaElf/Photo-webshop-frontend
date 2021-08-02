@@ -23,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TitledCardBlock = () => {
+const TitledCardBlock = ({ title }) => {
   const classes = useStyles();
   return (
     <div className={classes.homeBody}>
       <Grid container className={classes.titledCardBlock}>
         <Grid item className={classes.titleBlock}>
-          <Typography variant="h5">Title</Typography>
+          <Typography variant="h5">{title}</Typography>
           <div>
             <Button disabled>
               <ArrowBackIcon />

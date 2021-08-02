@@ -3,7 +3,7 @@ import TitledCardBlock from "./TitledCardBlock";
 import CtaBlock from "./CtaBlock";
 import SpecificCategory from "./SpecificCategory";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <div>
@@ -12,10 +12,10 @@ const Home = () => {
       </div>
 
       <CtaBlock></CtaBlock>
-      <TitledCardBlock></TitledCardBlock>
-      <TitledCardBlock></TitledCardBlock>
+      <TitledCardBlock title="Newest" />
+      <TitledCardBlock title="Most popular" />
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
