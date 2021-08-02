@@ -7,8 +7,8 @@ const Home = () => {
   return (
     <div>
       <div>
-        <SpecificCategory />
-        <SpecificCategory />{" "}
+        <SpecificCategory category="Nature" />
+        <SpecificCategory category="Architecture" />
       </div>
 
       <CtaBlock></CtaBlock>
