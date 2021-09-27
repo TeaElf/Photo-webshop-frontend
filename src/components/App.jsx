@@ -8,10 +8,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Navigation /> */}
-        <SinglePhotoPage title="More from this artist" />
-        {/* <HomePage /> */}
-        {/* <Footer /> */}
+        <Navigation />
+        {/* <SinglePhotoPage title="More from this artist" /> */}
+        <HomePage />
+        <Footer />
       </div>
     );
   }

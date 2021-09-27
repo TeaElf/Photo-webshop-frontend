@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
   upperbaritem: {
     margin: "10px",
   },
+  navplaceholder: {
+    height: "145px",
+    backgroundColor: "red",
+  },
   // paper: {
   // padding: theme.spacing(2),
   // textAlign: "center",
@@ -100,6 +104,7 @@ const Navigation = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+      <div className={classes.navplaceholder}></div>
     </div>
   );
 };
