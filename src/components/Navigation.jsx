@@ -9,7 +9,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import SearchBar from "./SearchBar";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,8 +23,16 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: "5%",
     // marginRight: "5%",
     // width: "90%",
-    width: "1600px",
+    // width: "1600px",
+    minWidth: "80%",
     alignItems: "center",
+  },
+  lowerbar: {
+    flexGrow: 1,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    minWidth: "30%",
   },
   toolbar: {
     padding: "20px 0px",
@@ -41,6 +49,12 @@ const useStyles = makeStyles((theme) => ({
   // textAlign: "center",
   //   color: theme.palette.text.secondary,
   // },
+  logoText: {
+    color: "#000000",
+    "&:hover": {
+      textDecoration: "none",
+    },
+  },
 }));
 
 const Navigation = () => {
@@ -51,8 +65,8 @@ const Navigation = () => {
         <Toolbar className={classes.toolbar}>
           <Grid container direction="column" spacing={3} alignItems="center">
             <Grid item xs={12} className={classes.upperbar}>
-              <Link color="black">
-                <Typography align="center">Photowebshop</Typography>
+              <Link color="black" href="/" className={classes.logoText}>
+                <Typography align="center">PHOTOWEBSHOP</Typography>
               </Link>
 
               <div className={classes.title}>
@@ -62,7 +76,7 @@ const Navigation = () => {
               <Button className={classes.upperbaritem}>Submit a photo</Button>
 
               <Link color="black" className={classes.upperbaritem}>
-                <ShoppingCartIcon />
+                <ShoppingCartOutlinedIcon />
               </Link>
 
               <Divider
@@ -84,7 +98,7 @@ const Navigation = () => {
               </Button>
             </Grid>
             <br />
-            <Grid item xs={6} className={classes.upperbar}>
+            <Grid item xs={6} className={classes.lowerbar}>
               <Link color="black">
                 <Typography>Wallpaper</Typography>
               </Link>

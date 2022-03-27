@@ -6,20 +6,25 @@ import { makeStyles } from "@material-ui/core/styles";
 import PhotoCard from "./PhotoCard";
 
 const useStyles = makeStyles((theme) => ({
-  titleBlock: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "1400px",
-  },
   homeBody: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
+    marginBottom: "57px",
   },
   titledCardBlock: {
-    width: "1400px",
+    // width: "1400px",
+    width: "100%",
     display: "flex",
     justifyContent: "space-between",
+  },
+  titleBlock: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    // width: "1400px",
+    marginBottom: "47px",
   },
 }));
 

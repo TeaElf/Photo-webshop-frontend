@@ -1,16 +1,39 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, Typography, Box } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import placeholderBackground from "../assets/img/placeholder-background.png";
 
 const useStyles = makeStyles((theme) => ({
   divBody: {
     display: "flex",
     justifyContent: "center",
+    width: "100%",
+    marginBottom: "60px",
   },
   block: {
-    width: "1400px",
-    padding: "40px 20px 40px 20px",
+    // width: "1400px",
+    width: "100%",
+    position: "relative",
+    // padding: "40px 20px 40px 20px",
     boxSizing: "border-box",
+  },
+  backgroundImage: {
+    width: "100%",
+    position: "relative",
+    height: "220px",
+    objectFit: "cover",
+  },
+  ctaText: {
+    position: "absolute",
+    top: "45px",
+    marginLeft: "80px",
+  },
+  textLine: {
+    marginBottom: "10px",
+    fontWeight: "500",
+  },
+  ctaButton: {
+    marginTop: "10px",
   },
 }));
 
@@ -19,14 +42,27 @@ const CtaBlock = () => {
   return (
     <div className={classes.divBody}>
       <div className={classes.block}>
-        <Typography variant="h5">Photographs for sale</Typography>
-        <Typography variant="subtitle1">
-          Buying signed editions is a great way to start collecting from a
-          photographer you love.
-        </Typography>
-        <Button color="primary" variant="contained">
-          Join Free →
-        </Button>
+        <img
+          src={placeholderBackground}
+          className={classes.backgroundImage}
+          alt="background"
+        />
+        <Box className={classes.ctaText}>
+          <Typography variant="h4" className={classes.textLine}>
+            Photographs for sale
+          </Typography>
+          <Typography variant="body1" className={classes.textLine}>
+            Buying signed editions is a great way to start collecting from a
+            photographer you love.
+          </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.ctaButton}
+          >
+            Join Free →
+          </Button>
+        </Box>
       </div>
     </div>
   );

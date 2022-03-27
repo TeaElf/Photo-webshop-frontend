@@ -2,6 +2,7 @@ import React from "react";
 import defaultPhoto from "../assets/img/default-photo.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   divContainer: {
@@ -10,7 +11,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   image: {
-    height: "250px",
+    height: "360px",
+    width: "360px",
+    objectFit: "cover",
+  },
+  marginBottomPhoto: {
+    marginBottom: "30px",
   },
 }));
 
@@ -19,7 +25,11 @@ const PhotoCard = () => {
 
   return (
     <div className={classes.divContainer}>
-      <img src={defaultPhoto} alt="default" className={classes.image} />
+      <img
+        src={defaultPhoto}
+        alt="default"
+        className={clsx(classes.image, classes.marginBottomPhoto)}
+      />
       <br />
       <Typography variant="h6">Title</Typography>
       <br />
