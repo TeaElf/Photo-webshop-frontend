@@ -10,6 +10,7 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import HomePage from "./HomePage";
+import ResultPage from "./ResultPage";
 import SinglePhotoPage from "./SinglePhotoPage";
 
 const webshopTheme = createTheme({
@@ -35,6 +36,7 @@ class App extends React.Component {
           <Router>
             <Switch>
               <Route exact path="/" component={HomePage} />
+              <Route exact path="/resultpage" component={ResultPage} />
               <Route exact path="/sphotopage" component={SinglePhotoPage} />
             </Switch>
           </Router>

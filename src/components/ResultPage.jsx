@@ -1,8 +1,7 @@
 import React from "react";
-import { Box, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Box } from "@material-ui/core";
 import TitledCardBlock from "./TitledCardBlock";
-import PhotoDetails from "./PhotoDetails";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   rootWrapper: {
@@ -11,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
   },
-  homePageWrapper: {
+  resultPageWrapper: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
@@ -19,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     // width: "1600px",
     width: "80%",
+  },
+  divBody: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: "100px",
   },
   divBodyVertical: {
     display: "flex",
@@ -29,18 +34,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SinglePhotoPage = ({ title }) => {
+const ResultPage = () => {
   const classes = useStyles();
   return (
     <div className={classes.rootWrapper}>
-      <Box className={classes.homePageWrapper}>
+      <Box className={classes.resultPageWrapper}>
         <Grid className={classes.divBodyVertical}>
-          <PhotoDetails />
-          <TitledCardBlock title="From this photographer" numOfRows={1} />
+          <TitledCardBlock title="Wallpaper" numOfRows={4} />
         </Grid>
       </Box>
     </div>
   );
 };
 
-export default SinglePhotoPage;
+export default ResultPage;
