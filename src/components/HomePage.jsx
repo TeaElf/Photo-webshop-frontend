@@ -48,8 +48,8 @@ const HomePage = () => {
 
         <Grid className={classes.divBodyVertical}>
           <CtaBlock></CtaBlock>
-          <TitledCardBlock title="Newest" />
-          <TitledCardBlock title="Most popular" />
+          <TitledCardBlock title="Newest" numOfRows={1} />
+          <TitledCardBlock title="Most popular" numOfRows={1} />
         </Grid>
       </Box>
     </div>

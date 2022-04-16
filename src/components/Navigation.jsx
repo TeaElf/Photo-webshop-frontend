@@ -9,8 +9,9 @@ import {
   Divider,
 } from "@material-ui/core";
 import SearchBar from "./SearchBar";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { makeStyles } from "@material-ui/core/styles";
+import ResultPage from "./ResultPage";
+import CartMenu from "./CartMenu";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -75,9 +76,9 @@ const Navigation = () => {
 
               <Button className={classes.upperbaritem}>Submit a photo</Button>
 
-              <Link color="black" className={classes.upperbaritem}>
-                <ShoppingCartOutlinedIcon />
-              </Link>
+              {/* <Link color="black" className={classes.upperbaritem}> */}
+              <CartMenu />
+              {/* </Link> */}
 
               <Divider
                 orientation="vertical"
@@ -99,19 +100,19 @@ const Navigation = () => {
             </Grid>
             <br />
             <Grid item xs={6} className={classes.lowerbar}>
-              <Link color="black">
+              <Link color="inherit" href="/resultpage">
                 <Typography>Wallpaper</Typography>
               </Link>
-              <Link color="black">
+              <Link color="inherit" href="/resultpage">
                 <Typography>Nature</Typography>
               </Link>
-              <Link color="black">
+              <Link color="inherit" href="/resultpage">
                 <Typography>People</Typography>
               </Link>
-              <Link color="black">
+              <Link color="inherit" href="/resultpage">
                 <Typography>Architecture</Typography>
               </Link>
-              <Link color="black">
+              <Link color="inherit" href="/resultpage">
                 <Typography>Macro</Typography>
               </Link>
             </Grid>

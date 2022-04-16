@@ -28,8 +28,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TitledCardBlock = ({ title }) => {
+const TitledCardBlock = ({ title, numOfRows }) => {
   const classes = useStyles();
+  // const returnRows = () => {
+  //   let rows = [];
+  //   for (let i = 0; i <= numOfRows; i++) {
+  //     rows.push(<PhotoCard />);
+  //   }
+  //   return rows;
+  // };
   return (
     <div className={classes.homeBody}>
       <Grid container className={classes.titledCardBlock}>
@@ -44,12 +51,36 @@ const TitledCardBlock = ({ title }) => {
             </Button>
           </div>
         </Grid>
-        <Grid item className={classes.titleBlock}>
-          <PhotoCard />
-          <PhotoCard />
-          <PhotoCard />
-          <PhotoCard />
-        </Grid>
+        {numOfRows === 1 && (
+          <Grid item className={classes.titleBlock}>
+            <PhotoCard />
+            <PhotoCard />
+            <PhotoCard />
+            <PhotoCard />
+          </Grid>
+        )}
+        {numOfRows === 4 && (
+          <>
+            <Grid item className={classes.titleBlock}>
+              <PhotoCard />
+              <PhotoCard />
+              <PhotoCard />
+              <PhotoCard />
+            </Grid>
+            <Grid item className={classes.titleBlock}>
+              <PhotoCard />
+              <PhotoCard />
+              <PhotoCard />
+              <PhotoCard />
+            </Grid>
+            <Grid item className={classes.titleBlock}>
+              <PhotoCard />
+              <PhotoCard />
+              <PhotoCard />
+              <PhotoCard />
+            </Grid>
+          </>
+        )}
       </Grid>
     </div>
   );
