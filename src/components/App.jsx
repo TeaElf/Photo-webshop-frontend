@@ -12,6 +12,10 @@ import Footer from "./Footer";
 import HomePage from "./HomePage";
 import ResultPage from "./ResultPage";
 import SinglePhotoPage from "./SinglePhotoPage";
+import SignIn from "./account/SignIn";
+import { makeStyles } from "@material-ui/core/styles";
+import SignUp from "./account/SignUp";
+import ForgotPassword from "./account/ForgotPassword";
 
 const webshopTheme = createTheme({
   palette: {
@@ -25,28 +29,43 @@ const webshopTheme = createTheme({
   },
 });
 
-class App extends React.Component {
-  render() {
-    return (
-      <ThemeProvider theme={webshopTheme}>
-        <div>
-          {/* TODO make a css file to reset to default margin and etc */}
-          <CssBaseline />
-          <Navigation />
-          <Router>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/resultpage" component={ResultPage} />
-              <Route exact path="/sphotopage" component={SinglePhotoPage} />
-            </Switch>
-          </Router>
-          {/* <SinglePhotoPage title="More from this artist" /> */}
-          {/* <HomePage /> */}
-          <Footer />
-        </div>
-      </ThemeProvider>
-    );
-  }
-}
+const useStyles = makeStyles((theme) => ({
+  main: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+}));
+
+// class App extends React.Component {
+const App = () => {
+  // render() {
+  const classes = useStyles();
+
+  return (
+    <ThemeProvider theme={webshopTheme}>
+      <div className={classes.main}>
+        {/* TODO make a css file to reset to default margin and etc */}
+        <CssBaseline />
+        <Navigation />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/resultpage" component={ResultPage} />
+            <Route exact path="/sphotopage" component={SinglePhotoPage} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
+          </Switch>
+        </Router>
+        {/* <SinglePhotoPage title="More from this artist" /> */}
+        {/* <HomePage /> */}
+        <Footer />
+      </div>
+    </ThemeProvider>
+  );
+  // }
+};
 
 export default App;

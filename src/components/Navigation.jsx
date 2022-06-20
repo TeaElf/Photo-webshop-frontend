@@ -86,17 +86,21 @@ const Navigation = () => {
                 className={classes.upperbaritem}
               ></Divider>
 
-              <Button variant="contained" className={classes.upperbaritem}>
-                Sign in
-              </Button>
+              <Link href="/signin">
+                <Button variant="contained" className={classes.upperbaritem}>
+                  Sign in
+                </Button>
+              </Link>
 
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.upperbaritem}
-              >
-                Join Free
-              </Button>
+              <Link href="/signup">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.upperbaritem}
+                >
+                  Join Free
+                </Button>
+              </Link>
             </Grid>
             <br />
             <Grid item xs={6} className={classes.lowerbar}>
