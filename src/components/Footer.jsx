@@ -63,6 +63,10 @@ const Footer = () => {
             <Link href="https://linkedin.com" className={classes.footerText}>
               Linkedin
             </Link>
+            <br />
+            <Link href="/myprofilepage" className={classes.footerText}>
+              My profile page
+            </Link>
           </div>
         </Toolbar>
         <Box className={classes.copyrightBox}>

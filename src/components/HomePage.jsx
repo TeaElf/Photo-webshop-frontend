@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Box } from "@material-ui/core";
 import TitledCardBlock from "./TitledCardBlock";
 import CtaBlock from "./CtaBlock";
 import SpecificCategory from "./SpecificCategory";
 import { makeStyles } from "@material-ui/core/styles";
+import { useGetPhotosQuery } from "../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   rootWrapper: {
@@ -34,11 +35,33 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
   },
+  // image: {
+  //   maxWidth: "400px",
+  //   maxHeight: "400px",
+  // },
 }));
 
 const HomePage = () => {
   const classes = useStyles();
+  const { data } = useGetPhotosQuery();
+  useEffect(() => {
+    console.log("data ", data);
+  }, [data]);
   return (
+    // <>
+    //   {data && (
+    //     <>
+    //       {data.content.map((item) => {
+    //         return (
+    //           <div>
+    //             <img
+    //               src={item.path}
+    //               alt={item.title}
+    //               className={classes.image}
+    //             />
+    //           </div>
+    //         );
+    //       })}
     <div className={classes.rootWrapper}>
       <Box className={classes.homePageWrapper}>
         <Grid container className={classes.divBody}>
@@ -53,6 +76,9 @@ const HomePage = () => {
         </Grid>
       </Box>
     </div>
+    //     </>
+    //   )}
+    // </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useLoginMutation } from "../../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,6 +29,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [login] = useLoginMutation("");
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChangeInput = (e) => {
+    console.log("handleChangeInput e: ", e);
+    e.target.id === "username" && setUsername(e.target.value);
+    e.target.id === "password" && setPassword(e.target.value);
+    console.log("username: ", username);
+    console.log("password: ", password);
+  };
+
+  const handleSubmit = () => {
+    console.log("logging in...");
+    //e.preventDefault();
+    const payload = {
+      username: username,
+      password: password,
+    };
+    console.log("handleSubmit payload: ", payload);
+    debugger;
+    login(payload);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,11 +67,13 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
             autoFocus
+            value={username}
+            onChange={handleChangeInput}
           />
           <TextField
             variant="outlined"
@@ -58,6 +85,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={handleChangeInput}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -69,6 +98,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>

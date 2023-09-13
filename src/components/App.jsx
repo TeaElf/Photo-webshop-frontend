@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Redirect,
-  Route,
-  Switch,
-  BrowserRouter as Router,
-} from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import Navigation from "./Navigation";
@@ -16,6 +11,7 @@ import SignIn from "./account/SignIn";
 import { makeStyles } from "@material-ui/core/styles";
 import SignUp from "./account/SignUp";
 import ForgotPassword from "./account/ForgotPassword";
+import MyProfilePage from "./MyProfilePage";
 
 const webshopTheme = createTheme({
   palette: {
@@ -57,6 +53,7 @@ const App = () => {
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route exact path="/myprofilepage" component={MyProfilePage} />
           </Switch>
         </Router>
         {/* <SinglePhotoPage title="More from this artist" /> */}
