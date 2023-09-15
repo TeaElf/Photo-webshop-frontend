@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import Navigation from "./Navigation";
@@ -46,15 +46,19 @@ const App = () => {
         <CssBaseline />
         <Navigation />
         <Router>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/resultpage" component={ResultPage} />
-            <Route exact path="/sphotopage" component={SinglePhotoPage} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/forgotpassword" component={ForgotPassword} />
-            <Route exact path="/myprofilepage" component={MyProfilePage} />
-          </Switch>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route
+              exact
+              path="/resultpage/:key/:value"
+              element={<ResultPage />}
+            />
+            <Route exact path="/sphotopage/:id" element={<SinglePhotoPage />} />
+            <Route exact path="/signin" element={<SignIn />} />
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+            <Route exact path="/myprofilepage" element={<MyProfilePage />} />
+          </Routes>
         </Router>
         {/* <SinglePhotoPage title="More from this artist" /> */}
         {/* <HomePage /> */}

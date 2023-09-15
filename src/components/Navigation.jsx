@@ -104,19 +104,22 @@ const Navigation = () => {
             </Grid>
             <br />
             <Grid item xs={6} className={classes.lowerbar}>
-              <Link color="inherit" href="/resultpage">
+              <Link color="inherit" href="/resultpage/category.name/wallpaper">
                 <Typography>Wallpaper</Typography>
               </Link>
-              <Link color="inherit" href="/resultpage">
+              <Link color="inherit" href="/resultpage/category.name/nature">
                 <Typography>Nature</Typography>
               </Link>
-              <Link color="inherit" href="/resultpage">
+              <Link color="inherit" href="/resultpage/category.name/people">
                 <Typography>People</Typography>
               </Link>
-              <Link color="inherit" href="/resultpage">
+              <Link
+                color="inherit"
+                href="/resultpage/category.name/architecture"
+              >
                 <Typography>Architecture</Typography>
               </Link>
-              <Link color="inherit" href="/resultpage">
+              <Link color="inherit" href="/resultpage/category.name/macro">
                 <Typography>Macro</Typography>
               </Link>
             </Grid>

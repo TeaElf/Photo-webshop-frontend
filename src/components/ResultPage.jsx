@@ -1,7 +1,9 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Grid, Box } from "@material-ui/core";
 import TitledCardBlock from "./TitledCardBlock";
 import { makeStyles } from "@material-ui/core/styles";
+import { capitalizeText } from "../util/stringUtils";
 
 const useStyles = makeStyles((theme) => ({
   rootWrapper: {
@@ -36,14 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
 const ResultPage = () => {
   const classes = useStyles();
+
+  const { key, value } = useParams();
+
   return (
     <div className={classes.rootWrapper}>
       <Box className={classes.resultPageWrapper}>
         <Grid className={classes.divBodyVertical}>
           <TitledCardBlock
-            title="Wallpaper"
+            title={capitalizeText(value)}
             numOfRows={4}
-            defaultFilters={{ ["category.name"]: "wallpaper", size: 4 }}
+            defaultFilters={{ [key]: value, size: 4 }}
           />
         </Grid>
       </Box>
