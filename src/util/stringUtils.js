@@ -16,4 +16,7 @@ const capitalizeText = (text) => {
   return capitalizedText;
 };
 
-export { handleUndefined, handlePrice, capitalizeText };
+const addHashtag = (tag) => {
+  return "#" + tag;
+};
+export { handleUndefined, handlePrice, capitalizeText, addHashtag };

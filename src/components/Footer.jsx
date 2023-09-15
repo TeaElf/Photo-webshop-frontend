@@ -48,7 +48,7 @@ const Footer = () => {
               Home{" "}
             </Link>
             <br />
-            <Link href="/sphotopage" className={classes.footerText}>
+            <Link href="/sphotopage/30" className={classes.footerText}>
               Single Photo Page
             </Link>
             <br />

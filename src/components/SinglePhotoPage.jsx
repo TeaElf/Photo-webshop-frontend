@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TitledCardBlock from "./TitledCardBlock";
 import PhotoDetails from "./PhotoDetails";
+import { useParams } from "react-router-dom";
+import { useGetPhotoQuery } from "../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   rootWrapper: {
@@ -29,22 +31,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SinglePhotoPage = ({ title }) => {
+const SinglePhotoPage = () => {
   const classes = useStyles();
+  const { id } = useParams();
+  const { data } = useGetPhotoQuery(id);
+  useEffect(() => {
+    console.log("photo useEffect data ", data);
+  }, [data]);
   return (
-    <div className={classes.rootWrapper}>
-      <Box className={classes.homePageWrapper}>
-        <Grid className={classes.divBodyVertical}>
-          <PhotoDetails />
-          {/* TODO Change filters */}
-          <TitledCardBlock
-            title="From this photographer"
-            numOfRows={1}
-            defaultFilters={{ size: 4 }}
-          />
-        </Grid>
-      </Box>
-    </div>
+    <>
+      {data && (
+        <div className={classes.rootWrapper}>
+          <Box className={classes.homePageWrapper}>
+            <Grid className={classes.divBodyVertical}>
+              <PhotoDetails data={data} />
+              {/* TODO Change filters */}
+              <TitledCardBlock
+                title="From this photographer"
+                numOfRows={1}
+                defaultFilters={{ size: 4 }}
+              />
+            </Grid>
+          </Box>
+        </div>
+      )}
+    </>
   );
 };
 

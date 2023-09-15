@@ -96,37 +96,6 @@ const TitledCardBlock = ({ title, numOfRows, defaultFilters }) => {
                 <PhotoCardPlaceholder key={i} />
               ))}
             </Grid>
-
-            {/* {numOfRows === 1 && (
-              <Grid item className={classes.titleBlock}>
-                <PhotoCard />
-                <PhotoCard />
-                <PhotoCard />
-                <PhotoCard />
-              </Grid>
-            )}
-            {numOfRows === 4 && (
-              <>
-                <Grid item className={classes.titleBlock}>
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                </Grid>
-                <Grid item className={classes.titleBlock}>
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                </Grid>
-                <Grid item className={classes.titleBlock}>
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                </Grid>
-              </>
-            )} */}
           </Grid>
         </div>
       )}

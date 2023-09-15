@@ -13,6 +13,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 import defaultPhoto from "../assets/img/default-photo.jpg";
 import testPhoto02 from "../assets/img/test-photo-02.jpg";
+import { addHashtag } from "../util/stringUtils";
 
 const useStyles = makeStyles((theme) => ({
   divContainer: {
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PhotoDetails = () => {
+const PhotoDetails = ({ data }) => {
   const classes = useStyles();
 
   const [age, setAge] = React.useState("");
@@ -67,11 +68,11 @@ const PhotoDetails = () => {
     <div className={classes.divContainer}>
       <Box className={classes.imageContainer}>
         <Box className={classes.sectionBox}>
-          <img src={defaultPhoto} alt="default" className={classes.image} />
+          <img src={data.path} alt={data.title} className={classes.image} />
         </Box>
         <Box className={classes.sectionBox}>
           <Typography className={classes.typographyMargins} variant="h5">
-            Product Name
+            {data.title}
           </Typography>
           <Typography className={classes.typographyMargins} variant="h4">
             $4.99 - $12.99
@@ -113,14 +114,14 @@ const PhotoDetails = () => {
           Description:
         </Typography>
         <Typography className={classes.typographyMargins} variant="subtitle2">
-          Nature from above
+          {data.description}
         </Typography>
 
         <Typography className={classes.typographyMargins} variant="subtitle1">
           Tags:
         </Typography>
         <Typography className={classes.typographyMargins} variant="subtitle2">
-          #wallpaper #flower #spring
+          {data.tags.map((tag) => addHashtag(tag.name) + " ")}
         </Typography>
       </Box>
     </div>
