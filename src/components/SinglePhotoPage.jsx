@@ -36,7 +36,12 @@ const SinglePhotoPage = ({ title }) => {
       <Box className={classes.homePageWrapper}>
         <Grid className={classes.divBodyVertical}>
           <PhotoDetails />
-          <TitledCardBlock title="From this photographer" numOfRows={1} />
+          {/* TODO Change filters */}
+          <TitledCardBlock
+            title="From this photographer"
+            numOfRows={1}
+            defaultFilters={{ size: 4 }}
+          />
         </Grid>
       </Box>
     </div>

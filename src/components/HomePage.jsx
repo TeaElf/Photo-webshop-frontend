@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Grid, Box } from "@material-ui/core";
 import TitledCardBlock from "./TitledCardBlock";
 import CtaBlock from "./CtaBlock";
 import SpecificCategory from "./SpecificCategory";
 import { makeStyles } from "@material-ui/core/styles";
-import { useGetPhotosQuery } from "../templates/services/apiService";
+// import { useGetPhotosQuery } from "../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   rootWrapper: {
@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = () => {
   const classes = useStyles();
-  const { data } = useGetPhotosQuery();
-  useEffect(() => {
-    console.log("data ", data);
-  }, [data]);
+  // const { data } = useGetPhotosQuery();
+  // useEffect(() => {
+  //   console.log("data ", data);
+  // }, [data]);
   return (
     // <>
     //   {data && (
@@ -71,8 +71,18 @@ const HomePage = () => {
 
         <Grid className={classes.divBodyVertical}>
           <CtaBlock></CtaBlock>
-          <TitledCardBlock title="Newest" numOfRows={1} />
-          <TitledCardBlock title="Most popular" numOfRows={1} />
+          {/* TODO change to Newest */}
+          <TitledCardBlock
+            title="Landscape"
+            numOfRows={1}
+            defaultFilters={{ orientation: "landscape", size: 4 }}
+          />
+          {/* TODO change to Most popular */}
+          <TitledCardBlock
+            title="Sky"
+            numOfRows={1}
+            defaultFilters={{ title: "sky", size: 4 }}
+          />
         </Grid>
       </Box>
     </div>

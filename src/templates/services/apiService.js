@@ -11,7 +11,17 @@ export const apiService = createApi({
 
   endpoints: (builder) => {
     return {
-      getPhotos: builder.query({ query: () => "photos" }),
+      getPhotos: builder.query({
+        query: (filter) => {
+          console.log("apiServicefilter: ", filter);
+          if (filter) {
+            return `photos?${filter}`;
+          } else {
+            return `photos`;
+          }
+        },
+      }),
+      getPhoto: builder.query({ query: (id) => `photos/${id}` }),
       login: builder.mutation({
         query: (payload) => ({
           url: "auth/login",
@@ -23,4 +33,5 @@ export const apiService = createApi({
   },
 });
 
-export const { useGetPhotosQuery, useLoginMutation } = apiService;
+export const { useGetPhotosQuery, useGetPhotoQuery, useLoginMutation } =
+  apiService;

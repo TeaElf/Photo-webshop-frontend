@@ -40,7 +40,11 @@ const ResultPage = () => {
     <div className={classes.rootWrapper}>
       <Box className={classes.resultPageWrapper}>
         <Grid className={classes.divBodyVertical}>
-          <TitledCardBlock title="Wallpaper" numOfRows={4} />
+          <TitledCardBlock
+            title="Wallpaper"
+            numOfRows={4}
+            defaultFilters={{ ["category.name"]: "wallpaper", size: 4 }}
+          />
         </Grid>
       </Box>
     </div>
