@@ -6,9 +6,8 @@ const handleUndefined = (param, placeholder) => {
   }
 };
 
-// TODO check handlePrice - add e/$ to price
 const handlePrice = (price) => {
-  return price + "$";
+  return "€" + price;
 };
 
 const capitalizeText = (text) => {

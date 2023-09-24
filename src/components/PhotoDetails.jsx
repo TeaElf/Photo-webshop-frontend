@@ -3,17 +3,15 @@ import {
   Box,
   Button,
   Divider,
+  InputLabel,
   Typography,
   Select,
   FormControl,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-
-import defaultPhoto from "../assets/img/default-photo.jpg";
-import testPhoto02 from "../assets/img/test-photo-02.jpg";
 import { addHashtag } from "../util/stringUtils";
+import { handlePrice } from "../util/stringUtils";
 
 const useStyles = makeStyles((theme) => ({
   divContainer: {
@@ -38,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
   sectionBox: {
     width: "48%",
   },
+  subSectionBox: {
+    marginTop: "100px",
+  },
   descContainer: {
     width: "100%",
     display: "flex",
@@ -50,18 +51,30 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonAddToCart: {
     marginRight: "15px",
+    width: "300px",
+    height: "50px",
+  },
+  buttonCart: {
+    height: "50px",
+  },
+  shoppingCartIcon: {
+    fontSize: "22px",
   },
   margin: {
     margin: theme.spacing(1),
+  },
+  customSelect: {
+    minWidth: "150px",
   },
 }));
 
 const PhotoDetails = ({ data }) => {
   const classes = useStyles();
 
-  const [age, setAge] = React.useState("");
+  const [size, setSize] = React.useState(data.photoDetails[0].id);
+
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setSize(event.target.value);
   };
 
   return (
@@ -71,42 +84,57 @@ const PhotoDetails = ({ data }) => {
           <img src={data.path} alt={data.title} className={classes.image} />
         </Box>
         <Box className={classes.sectionBox}>
-          <Typography className={classes.typographyMargins} variant="h5">
-            {data.title}
-          </Typography>
-          <Typography className={classes.typographyMargins} variant="h4">
-            $4.99 - $12.99
-          </Typography>
-          <Divider />
-          <Typography className={classes.typographyMargins} variant="subtitle1">
-            Dimensions:
-          </Typography>
-          <Typography className={classes.typographyMargins} variant="subtitle2">
-            1920px x 1080px
-          </Typography>
-          <FormControl className={classes.margin}>
-            <Select
-              id="demo-customized-select-native"
-              value={age}
-              onChange={handleChange}
-              //input={<BootstrapInput />}
+          <Box>
+            <Typography className={classes.typographyMargins} variant="h5">
+              {data.title}
+            </Typography>
+            <Typography className={classes.typographyMargins} variant="h4">
+              {handlePrice(
+                data.photoDetails.find((detail) => detail.id == size).price
+              )}
+            </Typography>
+            <Divider />
+          </Box>
+          <Box className={classes.subSectionBox}>
+            <Typography
+              className={classes.typographyMargins}
+              variant="subtitle1"
             >
-              <option aria-label="None" value="" />
-              <option value={10}>960x640</option>
-              <option value={20}>1920x1080</option>
-              <option value={30}>2400x1200</option>
-            </Select>
-          </FormControl>
-          <Button
-            color="primary"
-            variant="contained"
-            className={classes.buttonAddToCart}
-          >
-            Add to cart
-          </Button>
-          <Button color="default" variant="outlined">
-            <ShoppingCartOutlinedIcon />
-          </Button>
+              Dimensions:
+            </Typography>
+            <FormControl className={classes.margin}>
+              <InputLabel id="custom-select-select-label">
+                Select a size
+              </InputLabel>
+              <Select
+                className={classes.customSelect}
+                id="custom-select"
+                value={size}
+                onChange={handleChange}
+                //input={<BootstrapInput />}
+              >
+                {data.photoDetails.map((item) => (
+                  <option value={item.id}>{item.size}</option>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box className={classes.subSectionBox}>
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.buttonAddToCart}
+            >
+              Add to cart
+            </Button>
+            <Button
+              color="default"
+              variant="outlined"
+              className={classes.buttonCart}
+            >
+              <ShoppingCartOutlinedIcon className={classes.shoppingCartIcon} />
+            </Button>
+          </Box>
         </Box>
       </Box>
       <Box className={classes.descContainer}>
