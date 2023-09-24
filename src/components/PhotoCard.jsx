@@ -1,9 +1,8 @@
 import React from "react";
-import defaultPhoto from "../assets/img/default-photo.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Link } from "@material-ui/core";
 import clsx from "clsx";
-import { handleUndefined } from "../util/stringUtils";
+import { handleUndefined, handlePrice } from "../util/stringUtils";
 
 // Style must be the same as in PhotoCardPlaceholder
 const useStyles = makeStyles((theme) => ({

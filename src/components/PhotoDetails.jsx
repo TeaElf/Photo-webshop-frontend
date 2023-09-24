@@ -90,7 +90,7 @@ const PhotoDetails = ({ data }) => {
             </Typography>
             <Typography className={classes.typographyMargins} variant="h4">
               {handlePrice(
-                data.photoDetails.find((detail) => detail.id == size).price
+                data.photoDetails.find((detail) => detail.id === size).price
               )}
             </Typography>
             <Divider />

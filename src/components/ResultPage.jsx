@@ -40,6 +40,7 @@ const ResultPage = () => {
   const classes = useStyles();
 
   const { key, value } = useParams();
+  console.log("key: " + key + " value: " + value);
 
   return (
     <div className={classes.rootWrapper}>

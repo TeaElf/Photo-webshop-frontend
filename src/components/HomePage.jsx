@@ -65,8 +65,10 @@ const HomePage = () => {
     <div className={classes.rootWrapper}>
       <Box className={classes.homePageWrapper}>
         <Grid container className={classes.divBody}>
-          <SpecificCategory category="Nature" />
-          <SpecificCategory category="Architecture" />
+          <SpecificCategory defaultFilters={{ ["category.name"]: "nature" }} />
+          <SpecificCategory
+            defaultFilters={{ ["category.name"]: "architecture" }}
+          />
         </Grid>
 
         <Grid className={classes.divBodyVertical}>

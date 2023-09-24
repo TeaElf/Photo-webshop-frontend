@@ -9,13 +9,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     width: "100%",
     marginBottom: "60px",
+    height: "220px",
   },
   block: {
     // width: "1400px",
     width: "100%",
     position: "relative",
     // padding: "40px 20px 40px 20px",
+    // padding: "50px 70px 50px 70px",
     boxSizing: "border-box",
+    // backgroundColor: "#EEEEEE",
   },
   backgroundImage: {
     width: "100%",
