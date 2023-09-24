@@ -45,11 +45,10 @@ const SinglePhotoPage = () => {
           <Box className={classes.homePageWrapper}>
             <Grid className={classes.divBodyVertical}>
               <PhotoDetails data={data} />
-              {/* TODO Change filters */}
               <TitledCardBlock
                 title="From this photographer"
                 numOfRows={1}
-                defaultFilters={{ size: 4 }}
+                defaultFilters={{ size: 4, userId: data.userId }}
               />
             </Grid>
           </Box>
