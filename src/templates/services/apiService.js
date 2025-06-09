@@ -13,6 +13,7 @@ export const apiService = createApi({
     return {
       getPhotos: builder.query({
         query: (filter) => {
+          // get object, parse it to string
           console.log("apiServicefilter: ", filter);
           if (filter) {
             return `photos?${filter}`;
@@ -29,6 +30,7 @@ export const apiService = createApi({
           body: payload,
         }),
       }),
+      getUser: builder.query({ query: (id) => `users/${id}` }),
     };
   },
 });

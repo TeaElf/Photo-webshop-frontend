@@ -77,13 +77,13 @@ const HomePage = () => {
           <TitledCardBlock
             title="Landscape"
             numOfRows={1}
-            defaultFilters={{ orientation: "landscape", size: 4 }}
+            defaultFilters={{ orientation: "landscape", size: 4, page: 0 }}
           />
           {/* TODO change to Most popular */}
           <TitledCardBlock
             title="Sky"
             numOfRows={1}
-            defaultFilters={{ title: "sky", size: 4 }}
+            defaultFilters={{ title: "sky", size: 4, page: 0 }}
           />
         </Grid>
       </Box>

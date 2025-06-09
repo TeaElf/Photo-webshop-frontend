@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { alpha, makeStyles } from "@material-ui/core/styles";
+import { useGetPhotosQuery } from "../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -48,6 +50,31 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const [searchValue, setSearchValue] = useState("");
+  const [triggerValue, setTriggerValue] = useState("");
+
+  // call api for data on every change
+  const parsedFilters = `category.name=${triggerValue}`;
+  // console.log("parsedFilters for search: ", parsedFilters);
+  const { data } = useGetPhotosQuery(parsedFilters);
+  useEffect(() => {
+    console.log("search useEffect data ", data);
+  }, [data]);
+
+  const handleChange = (event) => {
+    console.log("handle change value: ", event.target.value);
+    setSearchValue(event.target.value);
+  };
+
+  const keyPress = (event) => {
+    // if enter key was pressed call an api
+    if (event.keyCode === 13) {
+      setTriggerValue(searchValue);
+      navigate(`/resultpage/category.name/${searchValue}`);
+    }
+  };
 
   return (
     <div className={classes.search}>
@@ -61,6 +88,9 @@ const SearchBar = () => {
           input: classes.inputInput,
         }}
         inputProps={{ "aria-label": "search" }}
+        value={searchValue}
+        onChange={handleChange}
+        onKeyDown={keyPress}
       />
     </div>
   );

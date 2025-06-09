@@ -39,25 +39,58 @@ const App = () => {
   // render() {
   const classes = useStyles();
 
+  function WithNavigation({ component: ChildComponent }) {
+    return (
+      <>
+        <Navigation />
+        <ChildComponent />
+      </>
+    );
+  }
+
   return (
     <ThemeProvider theme={webshopTheme}>
       <div className={classes.main}>
         {/* TODO make a css file to reset to default margin and etc */}
         <CssBaseline />
-        <Navigation />
+        {/* <Navigation /> */}
         <Router>
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route
+              exact
+              path="/"
+              element={<WithNavigation component={HomePage} />}
+            />
             <Route
               exact
               path="/resultpage/:key/:value"
-              element={<ResultPage />}
+              element={<WithNavigation component={ResultPage} />}
             />
-            <Route exact path="/sphotopage/:id" element={<SinglePhotoPage />} />
-            <Route exact path="/signin" element={<SignIn />} />
-            <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
-            <Route exact path="/myprofilepage" element={<MyProfilePage />} />
+            <Route
+              exact
+              path="/sphotopage/:id"
+              element={<WithNavigation component={SinglePhotoPage} />}
+            />
+            <Route
+              exact
+              path="/signin"
+              element={<WithNavigation component={SignIn} />}
+            />
+            <Route
+              exact
+              path="/signup"
+              element={<WithNavigation component={SignUp} />}
+            />
+            <Route
+              exact
+              path="/forgotpassword"
+              element={<WithNavigation component={ForgotPassword} />}
+            />
+            <Route
+              exact
+              path="/myprofilepage"
+              element={<WithNavigation component={MyProfilePage} />}
+            />
           </Routes>
         </Router>
         {/* <SinglePhotoPage title="More from this artist" /> */}

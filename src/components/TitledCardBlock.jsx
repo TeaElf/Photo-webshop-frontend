@@ -32,24 +32,33 @@ const useStyles = makeStyles((theme) => ({
 
 const TitledCardBlock = ({ title, numOfRows, defaultFilters }) => {
   const classes = useStyles();
-  let parsedFilters = "";
-  console.log("parsedFilters after loop: ", parsedFilters);
 
-  for (const [key, value] of Object.entries(defaultFilters)) {
-    parsedFilters = parsedFilters + `${key}=${value}&`;
-  }
-
-  console.log("parsedFilters after loop: ", parsedFilters);
+  console.log("TCB init title: ", title);
+  console.log("TCB init defaultFilters ", defaultFilters);
 
   const [page, setPage] = useState(0);
-  const [filters, setFilters] = useState(parsedFilters);
+  const [filters, setFilters] = useState("");
+  const [parsedFilters, setParsedFilters] = useState("");
 
+  // const { data } = useGetPhotosQuery(parsedFilters);
+  // const { data } = useGetPhotosQuery("orientation=landscape&size=4&page=1");
   const { data } = useGetPhotosQuery(filters);
 
   useEffect(() => {
-    // console.log("TitledCardBlock useEffect data ", data);
-    // console.log("TitledCardBlock useEffect filters ", filters);
-  }, [data]);
+    console.log("TCB page ", { title, page });
+    console.log("TCB filters ", { title, filters });
+    console.log("TCB parsedFilters ", { title, parsedFilters });
+  }, [title, page, filters, parsedFilters]);
+
+  useEffect(() => {
+    for (const [key, value] of Object.entries(defaultFilters)) {
+      console.log("TCB parsedFilters mapping: ", { title, parsedFilters });
+      setParsedFilters(parsedFilters + `${key}=${value}&`);
+    }
+
+    console.log("TCB parsedFilters after loop: ", { title, parsedFilters });
+    setFilters(parsedFilters);
+  }, [title, defaultFilters]);
 
   // const returnRows = () => {
   //   let rows = [];
@@ -63,6 +72,7 @@ const TitledCardBlock = ({ title, numOfRows, defaultFilters }) => {
     console.log("handleChangePage newPage: ", newPage);
     setPage(newPage);
     setFilters(parsedFilters + `page=${newPage}`);
+    console.log("TCB handleChangePage ", { title, filters });
   };
 
   return (

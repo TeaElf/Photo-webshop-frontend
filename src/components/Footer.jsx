@@ -52,15 +52,27 @@ const Footer = () => {
               Single Photo Page
             </Link>
             <br />
-            <Link href="https://facebook.com" className={classes.footerText}>
+            <Link
+              href="https://facebook.com"
+              target="blank"
+              className={classes.footerText}
+            >
               Facebook
             </Link>
             <br />
-            <Link href="https://instagram.com" className={classes.footerText}>
+            <Link
+              href="https://instagram.com"
+              target="blank"
+              className={classes.footerText}
+            >
               Instagram
             </Link>
             <br />
-            <Link href="https://linkedin.com" className={classes.footerText}>
+            <Link
+              href="https://linkedin.com"
+              target="blank"
+              className={classes.footerText}
+            >
               Linkedin
             </Link>
             <br />
