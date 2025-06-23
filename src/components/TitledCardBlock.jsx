@@ -33,46 +33,17 @@ const useStyles = makeStyles((theme) => ({
 const TitledCardBlock = ({ title, numOfRows, defaultFilters }) => {
   const classes = useStyles();
 
-  console.log("TCB init title: ", title);
-  console.log("TCB init defaultFilters ", defaultFilters);
-
   const [page, setPage] = useState(0);
-  const [filters, setFilters] = useState("");
-  const [parsedFilters, setParsedFilters] = useState("");
+  const [filters, setFilters] = useState(() => ({ ...defaultFilters }));
 
-  // const { data } = useGetPhotosQuery(parsedFilters);
-  // const { data } = useGetPhotosQuery("orientation=landscape&size=4&page=1");
   const { data } = useGetPhotosQuery(filters);
 
-  useEffect(() => {
-    console.log("TCB page ", { title, page });
-    console.log("TCB filters ", { title, filters });
-    console.log("TCB parsedFilters ", { title, parsedFilters });
-  }, [title, page, filters, parsedFilters]);
-
-  useEffect(() => {
-    for (const [key, value] of Object.entries(defaultFilters)) {
-      console.log("TCB parsedFilters mapping: ", { title, parsedFilters });
-      setParsedFilters(parsedFilters + `${key}=${value}&`);
-    }
-
-    console.log("TCB parsedFilters after loop: ", { title, parsedFilters });
-    setFilters(parsedFilters);
-  }, [title, defaultFilters]);
-
-  // const returnRows = () => {
-  //   let rows = [];
-  //   for (let i = 0; i <= numOfRows; i++) {
-  //     rows.push(<PhotoCard />);
-  //   }
-  //   return rows;
-  // };
-
   const handleChangePage = (newPage) => {
-    console.log("handleChangePage newPage: ", newPage);
     setPage(newPage);
-    setFilters(parsedFilters + `page=${newPage}`);
-    console.log("TCB handleChangePage ", { title, filters });
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      page: newPage,
+    }));
   };
 
   return (

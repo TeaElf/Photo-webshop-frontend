@@ -13,10 +13,9 @@ export const apiService = createApi({
     return {
       getPhotos: builder.query({
         query: (filter) => {
-          // get object, parse it to string
-          console.log("apiServicefilter: ", filter);
-          if (filter) {
-            return `photos?${filter}`;
+          if (filter && Object.keys(filter).length > 0) {
+            const queryString = new URLSearchParams(filter).toString();
+            return `photos?${queryString}`;
           } else {
             return `photos`;
           }
