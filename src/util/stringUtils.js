@@ -7,7 +7,7 @@ const handleUndefined = (param, placeholder) => {
 };
 
 const handlePrice = (price) => {
-  return "€" + price;
+  return "€" + price.toFixed(2);
 };
 
 const capitalizeText = (text) => {

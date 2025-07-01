@@ -47,7 +47,8 @@ const PhotoCard = ({ item }) => {
         <br />
         <Typography variant="subtitle2">
           {item?.photoDetails &&
-            handleUndefined(item?.photoDetails[0]?.price, "Price")}
+            "€" +
+              handleUndefined(item?.photoDetails[0]?.price, "Price").toFixed(2)}
         </Typography>
       </div>
     </Link>

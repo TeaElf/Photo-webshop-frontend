@@ -1,6 +1,5 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Box } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import TitledCardBlock from "./TitledCardBlock";
 import { makeStyles } from "@material-ui/core/styles";
 import { capitalizeText } from "../util/stringUtils";
@@ -9,16 +8,13 @@ const useStyles = makeStyles((theme) => ({
   rootWrapper: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
     width: "100%",
   },
   resultPageWrapper: {
     display: "flex",
-    justifyContent: "center",
     flexDirection: "column",
     marginTop: theme.spacing(12),
     alignItems: "center",
-    // width: "1600px",
     width: "80%",
   },
   divBody: {
@@ -30,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
   divBodyVertical: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
     width: "100%",
   },
 }));
@@ -40,11 +34,10 @@ const ResultPage = () => {
   const classes = useStyles();
 
   const { key, value } = useParams();
-  console.log("key: " + key + " value: " + value);
 
   return (
     <div className={classes.rootWrapper}>
-      <Box className={classes.resultPageWrapper}>
+      <div className={classes.resultPageWrapper}>
         <Grid className={classes.divBodyVertical}>
           <TitledCardBlock
             title={capitalizeText(value)}
@@ -52,7 +45,7 @@ const ResultPage = () => {
             defaultFilters={{ [key]: value, size: 4 }}
           />
         </Grid>
-      </Box>
+      </div>
     </div>
   );
 };

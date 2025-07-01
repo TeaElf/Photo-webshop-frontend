@@ -71,7 +71,7 @@ const Navigation = () => {
               </Link>
 
               <div className={classes.title}>
-                <SearchBar></SearchBar>
+                <SearchBar />
               </div>
 
               <Button className={classes.upperbaritem}>Submit a photo</Button>
