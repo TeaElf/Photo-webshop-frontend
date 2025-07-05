@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -29,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   const [login] = useLoginMutation("");
 
   const [username, setUsername] = useState("");
@@ -42,16 +46,15 @@ export default function SignIn() {
     console.log("password: ", password);
   };
 
-  const handleSubmit = () => {
-    console.log("logging in...");
-    //e.preventDefault();
-    const payload = {
-      username: username,
-      password: password,
-    };
-    console.log("handleSubmit payload: ", payload);
-    debugger;
-    login(payload);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const result = await login({ username, password }).unwrap();
+      navigate(`/`);
+    } catch (err) {
+      console.error("Login failed: ", err);
+    }
   };
 
   return (
