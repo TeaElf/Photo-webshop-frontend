@@ -30,9 +30,20 @@ export const apiService = createApi({
         }),
       }),
       getUser: builder.query({ query: (id) => `users/${id}` }),
+      register: builder.mutation({
+        query: (payload) => ({
+          url: "users/",
+          method: "POST",
+          body: payload,
+        }),
+      }),
     };
   },
 });
 
-export const { useGetPhotosQuery, useGetPhotoQuery, useLoginMutation } =
-  apiService;
+export const {
+  useGetPhotosQuery,
+  useGetPhotoQuery,
+  useLoginMutation,
+  useRegisterMutation,
+} = apiService;

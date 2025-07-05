@@ -1,4 +1,5 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {
+  useRegisterMutation,
+  useLoginMutation,
+} from "../../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,6 +35,44 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const [register] = useRegisterMutation("");
+  const [login] = useLoginMutation("");
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChangeInput = (e) => {
+    console.log("handleChangeInput e: ", e);
+    e.target.id === "firstName" && setFirstName(e.target.value);
+    e.target.id === "lastName" && setLastName(e.target.value);
+    e.target.id === "email" && setEmail(e.target.value);
+    e.target.id === "username" && setUsername(e.target.value);
+    e.target.id === "password" && setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const result = await register({
+        name: firstName,
+        surname: lastName,
+        email,
+        username,
+        password,
+      }).unwrap();
+      // TODO fix 500 for pass {noop}
+      const loginResult = await login({ username, password }).unwrap();
+      navigate(`/`);
+    } catch (err) {
+      console.error("Register failed: ", err);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -50,6 +93,8 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                value={firstName}
+                onChange={handleChangeInput}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -61,6 +106,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                value={lastName}
+                onChange={handleChangeInput}
               />
             </Grid>
             <Grid item xs={12}>
@@ -72,6 +119,21 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={handleChangeInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                // autoComplete="username"
+                value={username}
+                onChange={handleChangeInput}
               />
             </Grid>
             <Grid item xs={12}>
@@ -83,7 +145,9 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                // autoComplete="current-password"
+                value={password}
+                onChange={handleChangeInput}
               />
             </Grid>
           </Grid>
@@ -93,6 +157,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
