@@ -8,6 +8,7 @@ import {
   Select,
   FormControl,
 } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { addHashtag } from "../util/stringUtils";
@@ -66,15 +67,29 @@ const useStyles = makeStyles((theme) => ({
   customSelect: {
     minWidth: "150px",
   },
+  customTagPill: {
+    borderRadius: "4px",
+    margin: theme.spacing(1),
+    backgroundColor: "#e0e0e0",
+  },
+  tagPillWrapper: {
+    display: "flex",
+  },
 }));
 
 const PhotoDetails = ({ data }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const [size, setSize] = React.useState(data.photoDetails[0].id);
 
   const handleChange = (event) => {
     setSize(event.target.value);
+  };
+
+  const handleTagClick = (tagName) => {
+    console.log("handle tag click: ", tagName);
+    navigate(`/resultpage/tags.name/${tagName}`);
   };
 
   return (
@@ -148,9 +163,23 @@ const PhotoDetails = ({ data }) => {
         <Typography className={classes.typographyMargins} variant="subtitle1">
           Tags:
         </Typography>
-        <Typography className={classes.typographyMargins} variant="subtitle2">
-          {data.tags.map((tag) => addHashtag(tag.name) + " ")}
-        </Typography>
+        <div className={classes.tagPillWrapper}>
+          {data.tags.map((tag) => (
+            <span
+              className={classes.customTagPill}
+              key={tag.id}
+              onClick={() => handleTagClick(tag.name)}
+              style={{ cursor: "pointer" }}
+            >
+              <Typography
+                className={classes.typographyMargins}
+                variant="subtitle2"
+              >
+                {tag.name + " "}
+              </Typography>
+            </span>
+          ))}
+        </div>
       </Box>
     </div>
   );
