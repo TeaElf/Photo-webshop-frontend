@@ -1,4 +1,4 @@
-import { Button, Typography, Box } from "@material-ui/core";
+import { Button, Typography, Box, Link } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import placeholderBackground from "../assets/img/placeholder-background.png";
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     // padding: "50px 70px 50px 70px",
     boxSizing: "border-box",
     // backgroundColor: "#EEEEEE",
+    backgroundColor: "#f3f3f3",
   },
   backgroundImage: {
     width: "100%",
@@ -45,11 +46,11 @@ const CtaBlock = () => {
   return (
     <div className={classes.divBody}>
       <div className={classes.block}>
-        <img
+        {/* <img
           src={placeholderBackground}
           className={classes.backgroundImage}
           alt="background"
-        />
+        /> */}
         <Box className={classes.ctaText}>
           <Typography variant="h4" className={classes.textLine}>
             Photographs for sale
@@ -58,13 +59,15 @@ const CtaBlock = () => {
             Buying signed editions is a great way to start collecting from a
             photographer you love.
           </Typography>
-          <Button
-            color="primary"
-            variant="contained"
-            className={classes.ctaButton}
-          >
-            Join Free →
-          </Button>
+          <Link href="/signup">
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.ctaButton}
+            >
+              Join Free →
+            </Button>
+          </Link>
         </Box>
       </div>
     </div>
