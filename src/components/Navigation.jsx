@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Grid,
   AppBar,
@@ -10,7 +9,6 @@ import {
 } from "@material-ui/core";
 import SearchBar from "./SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
-import ResultPage from "./ResultPage";
 import CartMenu from "./CartMenu";
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +72,9 @@ const Navigation = () => {
                 <SearchBar />
               </div>
 
-              <Button className={classes.upperbaritem}>Submit a photo</Button>
+              <Link href="/submitphoto">
+                <Button className={classes.upperbaritem}>Submit a photo</Button>
+              </Link>
 
               {/* <Link color="black" className={classes.upperbaritem}> */}
               <CartMenu />

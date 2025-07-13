@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -12,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SignUp from "./account/SignUp";
 import ForgotPassword from "./account/ForgotPassword";
 import MyProfilePage from "./MyProfilePage";
+import SubmitPhoto from "./SubmitPhoto";
 
 const webshopTheme = createTheme({
   palette: {
@@ -80,6 +80,11 @@ const App = () => {
               exact
               path="/signup"
               element={<WithNavigation component={SignUp} />}
+            />
+            <Route
+              exact
+              path="/submitphoto"
+              element={<WithNavigation component={SubmitPhoto} />}
             />
             <Route
               exact

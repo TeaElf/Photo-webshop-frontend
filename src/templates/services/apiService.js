@@ -22,6 +22,14 @@ export const apiService = createApi({
         },
       }),
       getPhoto: builder.query({ query: (id) => `photos/${id}` }),
+      submitPhoto: builder.mutation({
+        query: (payload) => ({
+          url: "photos/",
+          method: "POST",
+          body: payload,
+        }),
+      }),
+      getCategories: builder.query({ query: () => `categories` }),
       login: builder.mutation({
         query: (payload) => ({
           url: "auth/login",
@@ -44,6 +52,8 @@ export const apiService = createApi({
 export const {
   useGetPhotosQuery,
   useGetPhotoQuery,
+  useSubmitPhotoMutation,
+  useGetCategoriesQuery,
   useLoginMutation,
   useRegisterMutation,
 } = apiService;
