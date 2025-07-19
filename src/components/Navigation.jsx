@@ -19,19 +19,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
     justifyContent: "space-between",
-    // marginLeft: "5%",
-    // marginRight: "5%",
-    // width: "90%",
-    // width: "1600px",
     minWidth: "80%",
     alignItems: "center",
   },
   lowerbar: {
-    flexGrow: 1,
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    minWidth: "30%",
+  },
+  lowerbarItem: {
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
   },
   toolbar: {
     padding: "20px 0px",
@@ -43,11 +41,6 @@ const useStyles = makeStyles((theme) => ({
     height: "145px",
     backgroundColor: "red",
   },
-  // paper: {
-  // padding: theme.spacing(2),
-  // textAlign: "center",
-  //   color: theme.palette.text.secondary,
-  // },
   logoText: {
     color: "#000000",
     "&:hover": {
@@ -103,25 +96,41 @@ const Navigation = () => {
               </Link>
             </Grid>
             <br />
-            <Grid item xs={6} className={classes.lowerbar}>
-              <Link color="inherit" href="/resultpage/category.name/wallpaper">
-                <Typography>Wallpaper</Typography>
-              </Link>
-              <Link color="inherit" href="/resultpage/category.name/nature">
-                <Typography>Nature</Typography>
-              </Link>
-              <Link color="inherit" href="/resultpage/category.name/people">
-                <Typography>People</Typography>
-              </Link>
-              <Link
-                color="inherit"
-                href="/resultpage/category.name/architecture"
-              >
-                <Typography>Architecture</Typography>
-              </Link>
-              <Link color="inherit" href="/resultpage/category.name/macro">
-                <Typography>Macro</Typography>
-              </Link>
+            <Grid container item className={classes.lowerbar}>
+              <Grid item xs={12} sm="auto" className={classes.lowerbarItem}>
+                <Link
+                  color="inherit"
+                  href="/resultpage/category.name/wallpaper"
+                >
+                  <Typography>Wallpaper</Typography>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm="auto" className={classes.lowerbarItem}>
+                <Link color="inherit" href="/resultpage/category.name/nature">
+                  <Typography>Nature</Typography>
+                </Link>
+              </Grid>
+
+              <Grid item xs={12} sm="auto" className={classes.lowerbarItem}>
+                <Link color="inherit" href="/resultpage/category.name/people">
+                  <Typography>People</Typography>
+                </Link>
+              </Grid>
+
+              <Grid item xs={12} sm="auto" className={classes.lowerbarItem}>
+                <Link
+                  color="inherit"
+                  href="/resultpage/category.name/architecture"
+                >
+                  <Typography>Architecture</Typography>
+                </Link>
+              </Grid>
+
+              <Grid item xs={12} sm="auto" className={classes.lowerbarItem}>
+                <Link color="inherit" href="/resultpage/category.name/macro">
+                  <Typography>Macro</Typography>
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </Toolbar>

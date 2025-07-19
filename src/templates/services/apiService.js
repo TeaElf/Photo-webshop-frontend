@@ -8,7 +8,7 @@ export const apiService = createApi({
     // baseUrl: "${config.rfq_service}/api/v1/",
     baseUrl: "http://localhost:8080/",
   }),
-
+  tagTypes: ["User"],
   endpoints: (builder) => {
     return {
       getPhotos: builder.query({
@@ -37,10 +37,21 @@ export const apiService = createApi({
           body: payload,
         }),
       }),
-      getUser: builder.query({ query: (id) => `users/${id}` }),
+      getUser: builder.query({
+        query: (id) => `users/${id}`,
+        providesTags: ["User"],
+      }),
+      editUser: builder.mutation({
+        query: ({ id, payload }) => ({
+          url: `users/${id}`,
+          method: "PUT",
+          body: payload,
+        }),
+        invalidatesTags: ["User"],
+      }),
       register: builder.mutation({
         query: (payload) => ({
-          url: "users/",
+          url: "users",
           method: "POST",
           body: payload,
         }),
@@ -56,4 +67,6 @@ export const {
   useGetCategoriesQuery,
   useLoginMutation,
   useRegisterMutation,
+  useGetUserQuery,
+  useEditUserMutation,
 } = apiService;

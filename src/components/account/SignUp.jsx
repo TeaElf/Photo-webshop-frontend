@@ -64,9 +64,8 @@ export default function SignUp() {
         surname: lastName,
         email,
         username,
-        password,
+        password: `{noop}${password}`,
       }).unwrap();
-      // TODO fix 500 for pass {noop}
       const loginResult = await login({ username, password }).unwrap();
       navigate(`/`);
     } catch (err) {
