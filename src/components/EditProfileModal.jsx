@@ -132,8 +132,7 @@ export default function EditProfileModal({ profileData }) {
         console.log("Form is not valid!");
         return;
       }
-      // mocked userId
-      const id = 3;
+      const id = profileData.id;
 
       const payload = {
         name: name,

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Typography, Box, Grid } from "@material-ui/core";
-import { useGetUserQuery } from "../templates/services/apiService";
+import { useGetCurrentUserQuery } from "../templates/services/apiService";
 import TitledCardBlock from "./TitledCardBlock";
 import EditProfileModal from "./EditProfileModal";
 
@@ -51,8 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MyProfilePage = () => {
   const classes = useStyles();
-  const mockedUserId = 3;
-  const { data } = useGetUserQuery(mockedUserId);
+  const { data } = useGetCurrentUserQuery();
   useEffect(() => {
     console.log("get user data ", data);
   }, [data]);
@@ -87,7 +86,7 @@ const MyProfilePage = () => {
               <TitledCardBlock
                 title="My photos"
                 numOfRows={1}
-                defaultFilters={{ size: 4, userId: mockedUserId }}
+                defaultFilters={{ size: 4, userId: data.id }}
               />
             </Grid>
           </Box>

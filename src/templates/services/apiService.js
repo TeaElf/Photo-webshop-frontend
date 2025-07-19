@@ -7,6 +7,7 @@ export const apiService = createApi({
   baseQuery: fetchBaseQuery({
     // baseUrl: "${config.rfq_service}/api/v1/",
     baseUrl: "http://localhost:8080/",
+    credentials: "include",
   }),
   tagTypes: ["User"],
   endpoints: (builder) => {
@@ -37,8 +38,8 @@ export const apiService = createApi({
           body: payload,
         }),
       }),
-      getUser: builder.query({
-        query: (id) => `users/${id}`,
+      getCurrentUser: builder.query({
+        query: (id) => "users/current",
         providesTags: ["User"],
       }),
       editUser: builder.mutation({
@@ -67,6 +68,6 @@ export const {
   useGetCategoriesQuery,
   useLoginMutation,
   useRegisterMutation,
-  useGetUserQuery,
+  useGetCurrentUserQuery,
   useEditUserMutation,
 } = apiService;
