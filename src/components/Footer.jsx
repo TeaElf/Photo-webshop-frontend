@@ -6,7 +6,6 @@ import {
   Box,
   Divider,
 } from "@material-ui/core";
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     padding: "7vh 8%",
     backgroundColor: "#F9F9FB",
-    color: "black",
+    color: "#000000",
   },
   copyrightBox: {
     display: "flex",

@@ -57,14 +57,10 @@ const SearchBar = () => {
 
   // call api for data on every change
   const parsedFilters = `category.name=${triggerValue}`;
-  // console.log("parsedFilters for search: ", parsedFilters);
-  const { data } = useGetPhotosQuery(parsedFilters);
-  useEffect(() => {
-    console.log("search useEffect data ", data);
-  }, [data]);
+
+  useGetPhotosQuery(parsedFilters);
 
   const handleChange = (event) => {
-    console.log("handle change value: ", event.target.value);
     setSearchValue(event.target.value);
   };
 

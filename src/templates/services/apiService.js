@@ -31,15 +31,8 @@ export const apiService = createApi({
         }),
       }),
       getCategories: builder.query({ query: () => `categories` }),
-      login: builder.mutation({
-        query: (payload) => ({
-          url: "auth/login",
-          method: "POST",
-          body: payload,
-        }),
-      }),
       getCurrentUser: builder.query({
-        query: (id) => "users/current",
+        query: () => "users/current",
         providesTags: ["User"],
       }),
       editUser: builder.mutation({
@@ -50,12 +43,28 @@ export const apiService = createApi({
         }),
         invalidatesTags: ["User"],
       }),
+      login: builder.mutation({
+        query: (payload) => ({
+          url: "auth/login",
+          method: "POST",
+          body: payload,
+        }),
+        invalidatesTags: ["User"],
+      }),
       register: builder.mutation({
         query: (payload) => ({
           url: "users",
           method: "POST",
           body: payload,
         }),
+        invalidatesTags: ["User"],
+      }),
+      logout: builder.mutation({
+        query: () => ({
+          url: "auth/logout",
+          method: "POST",
+        }),
+        invalidatesTags: ["User"],
       }),
     };
   },
@@ -70,4 +79,5 @@ export const {
   useRegisterMutation,
   useGetCurrentUserQuery,
   useEditUserMutation,
+  useLogoutMutation,
 } = apiService;

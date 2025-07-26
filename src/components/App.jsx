@@ -12,6 +12,7 @@ import SignUp from "./account/SignUp";
 import ForgotPassword from "./account/ForgotPassword";
 import MyProfilePage from "./MyProfilePage";
 import SubmitPhoto from "./SubmitPhoto";
+import ProtectedRoute from "../auth/ProtectedRoute";
 
 const webshopTheme = createTheme({
   palette: {
@@ -34,9 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// class App extends React.Component {
 const App = () => {
-  // render() {
   const classes = useStyles();
 
   function WithNavigation({ component: ChildComponent }) {
@@ -53,7 +52,6 @@ const App = () => {
       <div className={classes.main}>
         {/* TODO make a css file to reset to default margin and etc */}
         <CssBaseline />
-        {/* <Navigation /> */}
         <Router>
           <Routes>
             <Route
@@ -73,18 +71,13 @@ const App = () => {
             />
             <Route
               exact
-              path="/signin"
-              element={<WithNavigation component={SignIn} />}
-            />
-            <Route
-              exact
               path="/signup"
               element={<WithNavigation component={SignUp} />}
             />
             <Route
               exact
-              path="/submitphoto"
-              element={<WithNavigation component={SubmitPhoto} />}
+              path="/signin"
+              element={<WithNavigation component={SignIn} />}
             />
             <Route
               exact
@@ -93,18 +86,28 @@ const App = () => {
             />
             <Route
               exact
+              path="/submitphoto"
+              element={
+                <ProtectedRoute>
+                  <WithNavigation component={SubmitPhoto} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
               path="/myprofilepage"
-              element={<WithNavigation component={MyProfilePage} />}
+              element={
+                <ProtectedRoute>
+                  <WithNavigation component={MyProfilePage} />
+                </ProtectedRoute>
+              }
             />
           </Routes>
         </Router>
-        {/* <SinglePhotoPage title="More from this artist" /> */}
-        {/* <HomePage /> */}
         <Footer />
       </div>
     </ThemeProvider>
   );
-  // }
 };
 
 export default App;

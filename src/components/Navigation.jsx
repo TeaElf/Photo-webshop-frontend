@@ -7,9 +7,12 @@ import {
   Button,
   Divider,
 } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
 import CartMenu from "./CartMenu";
+import { useLogoutMutation } from "../templates/services/apiService";
+import { useAuth } from "../auth/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -51,13 +54,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Navigation = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const [logout] = useLogoutMutation();
+  const { user, ready, refresh } = useAuth();
+
+  if (!ready) return null;
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await logout();
+      await refresh();
+      navigate("/");
+    } catch (err) {
+      console.error("Logout failed: ", err);
+    } finally {
+    }
+  };
+
   return (
     <div>
       <AppBar color="default">
         <Toolbar className={classes.toolbar}>
           <Grid container direction="column" spacing={3} alignItems="center">
             <Grid item xs={12} className={classes.upperbar}>
-              <Link color="black" href="/" className={classes.logoText}>
+              <Link color="inherit" href="/" className={classes.logoText}>
                 <Typography align="center">PHOTOWEBSHOP</Typography>
               </Link>
 
@@ -65,35 +86,60 @@ const Navigation = () => {
                 <SearchBar />
               </div>
 
-              <Link href="/submitphoto">
-                <Button className={classes.upperbaritem}>Submit a photo</Button>
-              </Link>
+              {user && (
+                <Link href="/submitphoto">
+                  <Button className={classes.upperbaritem}>
+                    Submit a photo
+                  </Button>
+                </Link>
+              )}
 
-              {/* <Link color="black" className={classes.upperbaritem}> */}
-              <CartMenu />
+              {/* <Link color="inherit" className={classes.upperbaritem}> */}
+              {user && <CartMenu />}
               {/* </Link> */}
 
-              <Divider
-                orientation="vertical"
-                flexItem
-                className={classes.upperbaritem}
-              ></Divider>
+              {user && (
+                <Divider
+                  orientation="vertical"
+                  flexItem
+                  className={classes.upperbaritem}
+                ></Divider>
+              )}
 
-              <Link href="/signin">
-                <Button variant="contained" className={classes.upperbaritem}>
-                  Sign in
-                </Button>
-              </Link>
-
-              <Link href="/signup">
+              {!user && (
+                <Link href="/signin">
+                  <Button variant="contained" className={classes.upperbaritem}>
+                    Sign in
+                  </Button>
+                </Link>
+              )}
+              {!user && (
+                <Link href="/signup">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.upperbaritem}
+                  >
+                    Join Free
+                  </Button>
+                </Link>
+              )}
+              {user && (
+                <Link href="/myprofilepage">
+                  <Button variant="contained" className={classes.upperbaritem}>
+                    My Profile
+                  </Button>
+                </Link>
+              )}
+              {user && (
                 <Button
                   variant="contained"
-                  color="primary"
                   className={classes.upperbaritem}
+                  onClick={handleLogout}
                 >
-                  Join Free
+                  Logout
                 </Button>
-              </Link>
+              )}
             </Grid>
             <br />
             <Grid container item className={classes.lowerbar}>

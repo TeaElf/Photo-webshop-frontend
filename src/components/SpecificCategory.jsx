@@ -1,5 +1,4 @@
 import { Typography, Button, Grid, Box, Link } from "@material-ui/core";
-import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { capitalizeText } from "../util/stringUtils";
 import { useGetPhotosQuery } from "../templates/services/apiService";
@@ -52,7 +51,6 @@ const SpecificCategory = ({ defaultFilters }) => {
     parsedFilters = parsedFilters + `${key}=${value}&`;
   }
 
-  console.log("parsedFilters after loop: ", parsedFilters);
   const { data } = useGetPhotosQuery(parsedFilters);
 
   return (
