@@ -23,6 +23,7 @@ import {
   useGetCategoriesQuery,
   useSubmitPhotoMutation,
 } from "../templates/services/apiService";
+import { useAuth } from "../auth/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -87,6 +88,8 @@ export default function SubmitPhoto() {
 
   const [submitPhoto] = useSubmitPhotoMutation("");
 
+  const { user } = useAuth();
+
   const { data: categories } = useGetCategoriesQuery();
 
   const handleChangeOrientation = (event) => {
@@ -124,7 +127,7 @@ export default function SubmitPhoto() {
 
     try {
       if (!isFormValid()) {
-        console.log("Form is not valid!");
+        console.error("Form is not valid!");
         return;
       }
       const processedTags = processTags(tags);
@@ -136,7 +139,7 @@ export default function SubmitPhoto() {
         categoryId: categoryId,
         photoDetails: photoDetails,
         tags: processedTags,
-        userId: 1,
+        userId: user.id,
       };
       const result = await submitPhoto(payload).unwrap();
       const photoId = result.id;

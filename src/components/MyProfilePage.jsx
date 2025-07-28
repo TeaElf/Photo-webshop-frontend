@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 const MyProfilePage = () => {
   const classes = useStyles();
   const { data } = useGetCurrentUserQuery();
+
   useEffect(() => {
     console.log("get user data ", data);
   }, [data]);
