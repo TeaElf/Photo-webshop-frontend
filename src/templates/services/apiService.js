@@ -74,6 +74,15 @@ export const apiService = createApi({
         }),
         invalidatesTags: ["User"],
       }),
+      getCart: builder.query({
+        query: () => "cart",
+      }),
+      deleteItem: builder.mutation({
+        query: (photoDetailsId) => ({
+          url: `cart/${photoDetailsId}`,
+          method: "DELETE",
+        }),
+      }),
     };
   },
 });
@@ -89,4 +98,6 @@ export const {
   useEditUserMutation,
   useLogoutMutation,
   useAddToCartMutation,
+  useGetCartQuery,
+  useDeleteItemMutation,
 } = apiService;
