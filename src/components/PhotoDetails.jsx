@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -11,8 +11,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { addHashtag } from "../util/stringUtils";
 import { handlePrice } from "../util/stringUtils";
+import { useAddToCartMutation } from "../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   divContainer: {
@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
 const PhotoDetails = ({ data }) => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const [addToCart] = useAddToCartMutation();
 
   const [size, setSize] = React.useState(data.photoDetails[0].id);
 
@@ -88,8 +89,15 @@ const PhotoDetails = ({ data }) => {
   };
 
   const handleTagClick = (tagName) => {
-    console.log("handle tag click: ", tagName);
     navigate(`/resultpage/tags.name/${tagName}`);
+  };
+
+  const handleAddToCart = async () => {
+    const payload = {
+      photoId: data.id,
+      photoDetailsId: size,
+    };
+    await addToCart(payload);
   };
 
   return (
@@ -139,6 +147,7 @@ const PhotoDetails = ({ data }) => {
               color="primary"
               variant="contained"
               className={classes.buttonAddToCart}
+              onClick={handleAddToCart}
             >
               Add to cart
             </Button>

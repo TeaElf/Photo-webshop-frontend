@@ -66,6 +66,14 @@ export const apiService = createApi({
         }),
         invalidatesTags: ["User"],
       }),
+      addToCart: builder.mutation({
+        query: (payload) => ({
+          url: "cart",
+          method: "POST",
+          body: payload,
+        }),
+        invalidatesTags: ["User"],
+      }),
     };
   },
 });
@@ -80,4 +88,5 @@ export const {
   useGetCurrentUserQuery,
   useEditUserMutation,
   useLogoutMutation,
+  useAddToCartMutation,
 } = apiService;
