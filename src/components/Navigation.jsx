@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   AppBar,
@@ -7,12 +8,13 @@ import {
   Button,
   Divider,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
-import CartMenu from "./CartMenu";
-import { useLogoutMutation } from "../templates/services/apiService";
+
 import { useAuth } from "../auth/useAuth";
+import { useLogoutMutation } from "../templates/services/apiService";
+
+import SearchBar from "./SearchBar";
+import CartMenu from "./cart/CartMenu";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -94,9 +96,7 @@ const Navigation = () => {
                 </Link>
               )}
 
-              {/* <Link color="inherit" className={classes.upperbaritem}> */}
               {user && <CartMenu />}
-              {/* </Link> */}
 
               {user && (
                 <Divider

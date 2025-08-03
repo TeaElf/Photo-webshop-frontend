@@ -13,8 +13,13 @@ import ForgotPassword from "./account/ForgotPassword";
 import MyProfilePage from "./MyProfilePage";
 import SubmitPhoto from "./SubmitPhoto";
 import ProtectedRoute from "../auth/ProtectedRoute";
+import SuccessfulPayment from "./cart/SuccessfulPayment";
+import CheckoutPage from "./cart/CheckoutPage";
 
 const webshopTheme = createTheme({
+  typography: {
+    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
+  },
   palette: {
     background: {
       default: "#ffffff",
@@ -26,7 +31,7 @@ const webshopTheme = createTheme({
   },
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   main: {
     minHeight: "100vh",
     display: "flex",
@@ -101,6 +106,16 @@ const App = () => {
                   <WithNavigation component={MyProfilePage} />
                 </ProtectedRoute>
               }
+            />
+            <Route
+              exact
+              path="/successfulpayment"
+              element={<WithNavigation component={SuccessfulPayment} />}
+            />
+            <Route
+              exact
+              path="/checkoutpage"
+              element={<WithNavigation component={CheckoutPage} />}
             />
           </Routes>
         </Router>

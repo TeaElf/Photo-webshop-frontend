@@ -8,11 +8,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  // footerRoot: {
-  //   flexGrow: 1,
-  //   display: "flex",
-  // },
+const useStyles = makeStyles(() => ({
   appBar: {
     bottom: 0,
     position: "relative",
@@ -42,15 +38,6 @@ const Footer = () => {
           <div>
             <Typography>Follow us</Typography>
             <br />
-            <Link href="/" className={classes.footerText}>
-              {" "}
-              Home{" "}
-            </Link>
-            <br />
-            <Link href="/sphotopage/30" className={classes.footerText}>
-              Single Photo Page
-            </Link>
-            <br />
             <Link
               href="https://facebook.com"
               target="blank"
@@ -75,9 +62,6 @@ const Footer = () => {
               Linkedin
             </Link>
             <br />
-            <Link href="/myprofilepage" className={classes.footerText}>
-              My profile page
-            </Link>
           </div>
         </Toolbar>
         <Box className={classes.copyrightBox}>

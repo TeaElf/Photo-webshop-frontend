@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -8,11 +9,11 @@ import {
   Select,
   FormControl,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+
+import { useAddCartItemMutation } from "../templates/services/apiService";
 import { handlePrice } from "../util/stringUtils";
-import { useAddToCartMutation } from "../templates/services/apiService";
 
 const useStyles = makeStyles((theme) => ({
   divContainer: {
@@ -28,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   image: {
-    //height: "450px",
-    //width: "400px",
-    //width: "100%",
     maxHeight: "700px",
     maxWidth: "100%",
   },
@@ -80,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
 const PhotoDetails = ({ data }) => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [addToCart] = useAddToCartMutation();
+  const [addToCart] = useAddCartItemMutation();
 
-  const [size, setSize] = React.useState(data.photoDetails[0].id);
+  const [size, setSize] = useState(data.photoDetails[0].id);
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -134,7 +132,6 @@ const PhotoDetails = ({ data }) => {
                 id="custom-select"
                 value={size}
                 onChange={handleChange}
-                //input={<BootstrapInput />}
               >
                 {data.photoDetails.map((item) => (
                   <option value={item.id}>{item.size}</option>

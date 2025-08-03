@@ -9,7 +9,7 @@ export const apiService = createApi({
     baseUrl: "http://localhost:8080/",
     credentials: "include",
   }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Cart"],
   endpoints: (builder) => {
     return {
       getPhotos: builder.query({
@@ -21,6 +21,9 @@ export const apiService = createApi({
             return `photos`;
           }
         },
+      }),
+      getPhotosByIds: builder.query({
+        query: (ids) => `photos/findByIds?ids=${ids}`,
       }),
       getPhoto: builder.query({ query: (id) => `photos/${id}` }),
       submitPhoto: builder.mutation({
@@ -66,22 +69,31 @@ export const apiService = createApi({
         }),
         invalidatesTags: ["User"],
       }),
-      addToCart: builder.mutation({
+      getCart: builder.query({
+        query: () => "cart",
+        providesTags: ["Cart"],
+      }),
+      addCartItem: builder.mutation({
         query: (payload) => ({
           url: "cart",
           method: "POST",
           body: payload,
         }),
-        invalidatesTags: ["User"],
+        invalidatesTags: ["Cart"],
       }),
-      getCart: builder.query({
-        query: () => "cart",
-      }),
-      deleteItem: builder.mutation({
+      deleteCartItem: builder.mutation({
         query: (photoDetailsId) => ({
           url: `cart/${photoDetailsId}`,
           method: "DELETE",
         }),
+        invalidatesTags: ["Cart"],
+      }),
+      clearCart: builder.mutation({
+        query: () => ({
+          url: `cart`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["Cart"],
       }),
     };
   },
@@ -89,6 +101,7 @@ export const apiService = createApi({
 
 export const {
   useGetPhotosQuery,
+  useGetPhotosByIdsQuery,
   useGetPhotoQuery,
   useSubmitPhotoMutation,
   useGetCategoriesQuery,
@@ -97,7 +110,8 @@ export const {
   useGetCurrentUserQuery,
   useEditUserMutation,
   useLogoutMutation,
-  useAddToCartMutation,
+  useAddCartItemMutation,
   useGetCartQuery,
-  useDeleteItemMutation,
+  useDeleteCartItemMutation,
+  useClearCartMutation,
 } = apiService;
