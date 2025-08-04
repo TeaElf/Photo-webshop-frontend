@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -11,6 +13,7 @@ import {
 import { useAuth } from "../../auth/useAuth";
 import { useClearCartMutation } from "../../templates/services/apiService";
 
+import useCart from "./useCart";
 import CartItemsList from "./CartItemsList";
 
 const useStyles = makeStyles((theme) => ({
@@ -111,44 +114,57 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CheckoutPage() {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   const { user } = useAuth();
+  const { cartData, loading } = useCart();
   const [clearCart] = useClearCartMutation();
 
+  useEffect(() => {
+    if (!loading && cartData.length === 0) {
+      navigate("/");
+    }
+  }, [loading, cartData, navigate]);
+
+  if (!user) return null;
+
+  if (loading) {
+    return (
+      <Container className={classes.container} maxWidth="xs">
+        <Typography>Loading your cart…</Typography>
+      </Container>
+    );
+  }
+
   return (
-    <>
-      {user && (
-        <Container className={classes.container} maxWidth="xs">
-          <Box className={classes.headerWrapper}>
-            <Typography variant="h5">Your Order</Typography>
-            <Button className={classes.clearButton} onClick={clearCart}>
-              Clear cart
-            </Button>
-          </Box>
+    <Container className={classes.container} maxWidth="xs">
+      <Box className={classes.headerWrapper}>
+        <Typography variant="h5">Your Order</Typography>
+        <Button className={classes.clearButton} onClick={clearCart}>
+          Clear cart
+        </Button>
+      </Box>
 
-          <CartItemsList classes={classes} disableGutters={true} />
-          <Divider />
-          <Box className={classes.billingWrapper}>
-            <Typography className={classes.billingHeader} variant="h5">
-              Billing Information
-            </Typography>
-            <Typography className={classes.billingName}>
-              {user.name} {user.surname}
-            </Typography>
-            <Typography className={classes.billingEmail}>
-              {user.email}
-            </Typography>
-          </Box>
-          <Divider />
+      <CartItemsList classes={classes} disableGutters={true} />
+      <Divider />
+      <Box className={classes.billingWrapper}>
+        <Typography className={classes.billingHeader} variant="h5">
+          Billing Information
+        </Typography>
+        <Typography className={classes.billingName}>
+          {user.name} {user.surname}
+        </Typography>
+        <Typography className={classes.billingEmail}>{user.email}</Typography>
+      </Box>
+      <Divider />
 
-          <Box className={classes.bottomWrapper}>
-            <Link href="/successfulpayment">
-              <Button fullWidth variant="contained" color="primary">
-                Continue with Paypal
-              </Button>
-            </Link>
-          </Box>
-        </Container>
-      )}
-    </>
+      <Box className={classes.bottomWrapper}>
+        <Link href="/successfulpayment">
+          <Button fullWidth variant="contained" color="primary">
+            Continue with Paypal
+          </Button>
+        </Link>
+      </Box>
+    </Container>
   );
 }

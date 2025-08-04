@@ -26,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     minWidth: "80%",
     alignItems: "center",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      "& > *": {
+        marginBottom: theme.spacing(1),
+      },
+    },
   },
   lowerbar: {
     display: "flex",
@@ -35,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   lowerbarItem: {
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
+    textAlign: "center",
   },
   toolbar: {
     padding: "20px 0px",

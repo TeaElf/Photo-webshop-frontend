@@ -1,17 +1,10 @@
-import { useMemo } from "react";
-import { skipToken } from "@reduxjs/toolkit/query/react";
 import { Box, MenuItem, Typography, Divider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 import placeholderPhotoCart from "../../assets/img/default-photo.jpg";
-import {
-  useGetCartQuery,
-  useGetPhotosByIdsQuery,
-  useDeleteCartItemMutation,
-} from "../../templates/services/apiService";
 
-import { makeIdsParam, calcSubtotal } from "./utils";
+import useCart from "./useCart";
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
@@ -29,25 +22,9 @@ export default function CartItemsList({
   hideDelete = false,
   disableGutters = false,
 }) {
-  const { data: cartData = [], isLoading: cartLoading } = useGetCartQuery();
-  const [deleteItem] = useDeleteCartItemMutation();
+  const { cartData, photosData, subtotal, loading, deleteItem } = useCart();
 
-  const idsParam = useMemo(() => makeIdsParam(cartData), [cartData]);
-  const { data: photosData, isLoading: photosLoading } = useGetPhotosByIdsQuery(
-    idsParam || skipToken,
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
-
-  const subtotal = useMemo(
-    () => calcSubtotal(cartData, photosData),
-    [cartData, photosData]
-  );
-
-  if (cartLoading || photosLoading) {
-    return <Typography>Loading…</Typography>;
-  }
+  if (loading) return <Typography>Loading…</Typography>;
 
   return (
     <>

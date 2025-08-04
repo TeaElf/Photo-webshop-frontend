@@ -1,9 +1,7 @@
 import { Button, Typography, Box, Link } from "@material-ui/core";
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import placeholderBackground from "../assets/img/placeholder-background.png";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   divBody: {
     display: "flex",
     justifyContent: "center",
@@ -12,13 +10,9 @@ const useStyles = makeStyles((theme) => ({
     height: "220px",
   },
   block: {
-    // width: "1400px",
     width: "100%",
     position: "relative",
-    // padding: "40px 20px 40px 20px",
-    // padding: "50px 70px 50px 70px",
     boxSizing: "border-box",
-    // backgroundColor: "#EEEEEE",
     backgroundColor: "#f3f3f3",
   },
   backgroundImage: {
@@ -46,11 +40,6 @@ const CtaBlock = () => {
   return (
     <div className={classes.divBody}>
       <div className={classes.block}>
-        {/* <img
-          src={placeholderBackground}
-          className={classes.backgroundImage}
-          alt="background"
-        /> */}
         <Box className={classes.ctaText}>
           <Typography variant="h4" className={classes.textLine}>
             Photographs for sale

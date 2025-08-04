@@ -12,8 +12,10 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 
+import { useAuth } from "../auth/useAuth";
 import { useAddCartItemMutation } from "../templates/services/apiService";
 import { handlePrice } from "../util/stringUtils";
+import useCart from "./cart/useCart";
 
 const useStyles = makeStyles((theme) => ({
   divContainer: {
@@ -78,7 +80,10 @@ const useStyles = makeStyles((theme) => ({
 const PhotoDetails = ({ data }) => {
   const classes = useStyles();
   const navigate = useNavigate();
+
+  const { user } = useAuth();
   const [addToCart] = useAddCartItemMutation();
+  const { cartData, loading: cartLoading } = useCart();
 
   const [size, setSize] = useState(data.photoDetails[0].id);
 
@@ -90,12 +95,20 @@ const PhotoDetails = ({ data }) => {
     navigate(`/resultpage/tags.name/${tagName}`);
   };
 
-  const handleAddToCart = async () => {
-    const payload = {
-      photoId: data.id,
-      photoDetailsId: size,
-    };
-    await addToCart(payload);
+  const onAddClick = async () => {
+    if (!user) {
+      navigate("/signin");
+      return;
+    }
+    await addToCart({ photoId: data.id, photoDetailsId: size });
+  };
+
+  const onCartClick = () => {
+    if (!user) {
+      navigate("/signin");
+    } else {
+      navigate("/checkoutpage");
+    }
   };
 
   return (
@@ -139,19 +152,23 @@ const PhotoDetails = ({ data }) => {
               </Select>
             </FormControl>
           </Box>
+
           <Box className={classes.subSectionBox}>
             <Button
               color="primary"
               variant="contained"
               className={classes.buttonAddToCart}
-              onClick={handleAddToCart}
+              onClick={onAddClick}
             >
               Add to cart
             </Button>
+
             <Button
               color="default"
               variant="outlined"
               className={classes.buttonCart}
+              onClick={onCartClick}
+              disabled={cartLoading || cartData.length === 0}
             >
               <ShoppingCartOutlinedIcon className={classes.shoppingCartIcon} />
             </Button>

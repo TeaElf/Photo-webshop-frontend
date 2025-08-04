@@ -11,7 +11,12 @@ const useStyles = makeStyles((theme) => ({
   backgroundImage: {
     position: "relative",
     height: "220px",
-    width: "800px",
+    [theme.breakpoints.up("sm")]: {
+      width: "800px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "400px",
+    },
     objectFit: "cover",
   },
   ctaWrapper: {
@@ -34,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StyledCtaButton = withStyles((theme) => ({
+const StyledCtaButton = withStyles(() => ({
   root: {
     backgroundColor: "rgba(0, 0, 0, 0.1)",
     "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.3)" },

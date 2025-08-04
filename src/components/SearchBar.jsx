@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";

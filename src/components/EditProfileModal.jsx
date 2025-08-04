@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import {
   Button,
   CssBaseline,
@@ -141,11 +140,9 @@ export default function EditProfileModal({ profileData }) {
         country: country,
         avatar: avatar,
       };
-      const result = await editUser({ id, payload }).unwrap();
-      console.log("edit user successful: ", result);
+      await editUser({ id, payload }).unwrap();
 
       setOpen(false);
-      // refresh getUser
     } catch (err) {
       console.error("Edit user failed: ", err);
     }

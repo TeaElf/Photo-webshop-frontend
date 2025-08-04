@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Grid, Typography, Button } from "@material-ui/core";
@@ -28,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     width: "100%",
     marginBottom: "47px",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      "& > *": {
+        width: "100%",
+        marginBottom: theme.spacing(2),
+      },
+    },
   },
 }));
 

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Button, Box, Menu, Link } from "@material-ui/core";
+import { Button, Box, Menu, Link, Typography } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 
+import useCart from "./useCart";
 import CartItemsList from "./CartItemsList";
 
 const StyledMenu = withStyles({
@@ -80,11 +81,16 @@ const useStyles = makeStyles((theme) => ({
   cartCheckoutButton: {
     width: "100%",
   },
+  emptyMessage: {
+    padding: theme.spacing(4),
+    textAlign: "center",
+  },
 }));
 
 export default function CartMenu() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { cartData, loading } = useCart();
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -100,12 +106,24 @@ export default function CartMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <CartItemsList classes={classes} />
-        <Link href="/checkoutpage">
-          <Button fullWidth variant="contained" color="primary">
-            Checkout
-          </Button>
-        </Link>
+        {loading ? (
+          <Box className={classes.emptyMessage}>
+            <Typography>Loading…</Typography>
+          </Box>
+        ) : cartData.length === 0 ? (
+          <Box className={classes.emptyMessage}>
+            <Typography>Your cart is empty.</Typography>
+          </Box>
+        ) : (
+          <>
+            <CartItemsList classes={classes} />
+            <Link href="/checkoutpage">
+              <Button fullWidth variant="contained" color="primary">
+                Checkout
+              </Button>
+            </Link>
+          </>
+        )}
       </StyledMenu>
     </Box>
   );

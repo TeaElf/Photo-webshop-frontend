@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TitledCardBlock from "./TitledCardBlock";
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginTop: theme.spacing(12),
     alignItems: "center",
-    // width: "1600px",
     width: "80%",
   },
   divBodyVertical: {

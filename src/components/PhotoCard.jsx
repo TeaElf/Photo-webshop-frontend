@@ -1,11 +1,11 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Link } from "@material-ui/core";
 import clsx from "clsx";
-import { handleUndefined, handlePrice } from "../util/stringUtils";
+import { Typography, Link } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { handleUndefined } from "../util/stringUtils";
 
 // Style must be the same as in PhotoCardPlaceholder
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   divContainer: {
     display: "flex",
     flexDirection: "column",
@@ -30,12 +30,10 @@ const useStyles = makeStyles((theme) => ({
 const PhotoCard = ({ item }) => {
   const classes = useStyles();
 
-  // console.log("item in photo card", item);
   return (
     <Link href={`/sphotopage/${item.id}`} className={classes.linkStyle}>
       <div className={classes.divContainer}>
         <img
-          // src={defaultPhoto}
           src={item?.path}
           alt="default"
           className={clsx(classes.image, classes.marginBottomPhoto)}
